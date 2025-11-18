@@ -1,3 +1,28 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "hero-truck",
+      "description": "Dàn xe tải Soosan Vina đậu trên đường cao tốc",
+      "imageUrl": "https://images.unsplash.com/photo-1565793298595-6a879b1d9492?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHx0cnVjayUyMGZsZWV0fGVufDB8fHx8MTc2MzQ1ODA2MXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "truck fleet"
+    },
+    {
+      "id": "product-fridge-1",
+      "description": "Xe Tải Đông Lạnh Hyundai H150",
+      "imageUrl": "https://images.unsplash.com/photo-1759504994685-29996a2c513a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxyZWZyaWdlcmF0ZWQlMjB0cnVja3xlbnwwfHx8fDE3NjMzOTAwNjd8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "refrigerated truck"
+    },
+    {
+      "id": "product-crane-1",
+      "description": "Xe Tải Gắn Cẩu Tự Hành Hino",
+      "imageUrl": "https://images.unsplash.com/photo-1760181925370-21ecb4560bee?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxjcmFuZSUyMHRydWNrfGVufDB8fHx8MTc2MzM5MDA2N3ww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "crane truck"
+    },
+    {
+      "id": "product-trailer-1",
+      "description": "Sơ Mi Rơ Moóc Chở Hàng Lạnh",
+      "imageUrl": "https://images.unsplash.com/photo-1578727412900-e41cffc5074a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxzZW1pJTIwdHJhaWxlcnxlbnwwfHx8fDE3NjMzODgzNDh8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "semi trailer"
+    }
+  ]
 }
