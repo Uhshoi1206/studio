@@ -23,6 +23,30 @@
       "description": "Sơ Mi Rơ Moóc Chở Hàng Lạnh",
       "imageUrl": "https://images.unsplash.com/photo-1578727412900-e41cffc5074a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxzZW1pJTIwdHJhaWxlcnxlbnwwfHx8fDE3NjMzODgzNDh8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "semi trailer"
+    },
+    {
+      "id": "about-hero",
+      "description": "Nhà máy lắp ráp xe tải hiện đại",
+      "imageUrl": "https://images.unsplash.com/photo-1560574156-724de4433764?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHx0cnVjayUyMGZhY3Rvcnl8ZW58MHx8fHwxNzYzNTM5OTYxfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "truck factory"
+    },
+    {
+      "id": "value-quality",
+      "description": "Bánh răng cơ khí tượng trưng cho chất lượng",
+      "imageUrl": "https://images.unsplash.com/photo-1502444330042-d1a1ddf9bb5b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxnZWFycyUyMHF1YWxpdHl8ZW58MHx8fHwxNzYzNTQwMDM0fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "gears quality"
+    },
+    {
+      "id": "value-innovation",
+      "description": "Bóng đèn sáng tượng trưng cho sự đổi mới",
+      "imageUrl": "https://images.unsplash.com/photo-1545373678-35749a535a40?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxsaWdodGJ1bGIlMjBpbm5vdmF0aW9ufGVufDB8fHx8MTc2MzU0MDAzNHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "lightbulb innovation"
+    },
+    {
+      "id": "value-customer",
+      "description": "Cái bắt tay tượng trưng cho sự tin tưởng của khách hàng",
+      "imageUrl": "https://images.unsplash.com/photo-1563986768711-b3Bde3dc821e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxoYW5kc2hha2UlMjBjdXN0b21lcnxlbnwwfHx8fDE3NjM1NDAwMzR8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "handshake customer"
     }
   ]
 }
