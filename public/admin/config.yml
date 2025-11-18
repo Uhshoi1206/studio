@@ -1,67 +1,18 @@
-# Cau hinh cho trang quan tri Decap CMS
-# Luu y: De trien khai len san pham (production), ban can thay doi `local_backend` thanh `backend` voi `git-gateway`.
-# backend:
-#   name: git-gateway
-#   branch: main # Branch de luu noi dung
+backend:
+  name: git-gateway
+  branch: main # Branch to update (optional; defaults to master)
 
-# Cau hinh de phat trien local, khong can server. Noi dung se duoc luu trong trinh duyet.
-local_backend: true
+media_folder: "public/uploads" # Media files will be stored in the repo under public/uploads
+public_folder: "/uploads" # The src attribute for uploaded media will begin with /uploads
 
-# Cau hinh thu muc chua media
-media_folder: "public/images/uploads" # Noi luu file media khi tai len
-public_folder: "/images/uploads" # Duong dan public de hien thi file media
-
-# Cho phep them hinh anh tu URL ben ngoai thay vi tai len
-media_library:
-  name: image
-  config:
-    allow_external: true
-
-# Dinh nghia cac bo suu tap noi dung (Collections)
 collections:
-  # Bo suu tap San Pham
-  - name: "san_pham" # Ten ky thuat cua collection, khong dau, khong cach
-    label: "Sản Phẩm" # Ten hien thi tren giao dien quan tri
-    folder: "content/san-pham" # Thu muc luu cac file markdown cua san pham
-    create: true # Cho phep tao moi san pham
-    slug: "{{duong_dan}}" # Ten file se duoc tao tu truong 'duong_dan'
-    fields: # Cac truong du lieu cua mot san pham
-      - { label: "Tên Sản Phẩm", name: "tieu_de", widget: "string", hint: "Ví dụ: Xe Tải Đông Lạnh Hyundai New Mighty N250SL" }
-      - { label: "Đường Dẫn (slug)", name: "duong_dan", widget: "string", hint: "Phần cuối của URL, ví dụ: xe-tai-dong-lanh-n250sl. Viết liền không dấu, ngăn cách bằng gạch ngang." }
-      - label: "Danh Mục"
-        name: "danh_muc"
-        widget: "select"
-        options:
-          - { label: "Xe Tải Đông Lạnh", value: "xe-tai-dong-lanh" }
-          - { label: "Xe Tải Cẩu", value: "xe-tai-cau" }
-          - { label: "Sơ Mi Rơ Moóc", value: "so-mi-ro-mooc" }
-      - { label: "Ảnh Chính Đại Diện", name: "anh_chinh", widget: "image" }
-      - label: "Bộ Sưu Tập Ảnh"
-        name: "bo_suu_tap_anh"
-        widget: "list"
-        summary: "{{fields.anh}}"
-        field: { label: "Ảnh", name: "anh", widget: "image" }
-      - { label: "Giá Bán", name: "gia_ban", widget: "string", default: "Liên hệ", hint: "Điền giá bán hoặc giữ nguyên 'Liên hệ' để khách hàng gọi." }
-      - { label: "Thông Số & Mô Tả Chi Tiết", name: "thong_so_ky_thuat", widget: "markdown", hint: "Nội dung chi tiết về sản phẩm, bao gồm thông số kỹ thuật, tính năng nổi bật, v.v." }
-      - { label: "SEO: Tiêu Đề Trang", name: "seo_tieu_de", widget: "string", hint: "Tiêu đề hiển thị trên kết quả tìm kiếm Google. Nên dài từ 50-60 ký tự." }
-      - { label: "SEO: Mô Tả Trang", name: "seo_mo_ta", widget: "text", hint: "Mô tả ngắn hiển thị dưới tiêu đề trên Google. Nên dài từ 150-160 ký tự." }
-      - { label: "Từ Khóa Chính", name: "tu_khoa_chinh", widget: "string", hint: "Từ khóa quan trọng nhất mà bạn muốn trang này được xếp hạng." }
-
-  # Bo suu tap Tin Tuc
-  - name: "tin_tuc"
-    label: "Tin Tức"
-    folder: "content/tin-tuc"
-    create: true
-    slug: "{{duong_dan}}"
-    fields:
-      - { label: "Tiêu Đề Bài Viết", name: "tieu_de", widget: "string" }
-      - { label: "Đường Dẫn (slug)", name: "duong_dan", widget: "string" }
-      - { label: "Tác Giả", name: "tac_gia", widget: "string", default: "Soosan Vina" }
-      - { label: "Ngày Đăng", name: "ngay_dang", widget: "datetime" }
-      - { label: "Nội Dung Bài Viết", name: "noi_dung", widget: "markdown" }
-      - name: "seo_meta"
-        label: "Tối Ưu Hóa SEO"
-        widget: "object"
-        fields:
-          - { label: "Tiêu đề SEO", name: "tieu_de", widget: "string", hint: "Nếu bỏ trống, sẽ lấy tiêu đề bài viết." }
-          - { label: "Mô tả SEO", name: "mo_ta", widget: "text", hint: "Mô tả ngắn gọn cho máy tìm kiếm." }
+  - name: "posts" # Used in routes, e.g., /admin/collections/posts
+    label: "Tin tức" # Used in the UI
+    folder: "src/posts" # The path to the folder where the documents are stored
+    create: true # Allow users to create new documents in this collection
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}" # Filename template, e.g., YYYY-MM-DD-title.md
+    fields: # The fields for each document, usually in front matter
+      - {label: "Layout", name: "layout", widget: "hidden", default: "blog"}
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Publish Date", name: "date", widget: "datetime"}
+      - {label: "Body", name: "body", widget: "markdown"}

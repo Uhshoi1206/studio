@@ -36,6 +36,10 @@ const nextConfig: NextConfig = {
         source: '/loivao',
         destination: '/admin/index.html',
       },
+      {
+        source: '/admin',
+        destination: '/admin/index.html',
+      },
     ];
   },
 };
