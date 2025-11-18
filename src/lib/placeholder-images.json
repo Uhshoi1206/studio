@@ -71,6 +71,18 @@
       "description": "Xe Tải Gắn Cẩu Soosan 7 Tấn SCS746",
       "imageUrl": "https://images.unsplash.com/photo-1681358354718-294b4b272acb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8Y3JhbmslMjB0cnVja3xlbnwwfHx8fDE3NjMzOTU1MzJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "crank truck"
+    },
+    {
+      "id": "product-trailer-2",
+      "description": "Sơ Mi Rơ Moóc Sàn",
+      "imageUrl": "https://images.unsplash.com/photo-1616461952323-45a82f8c5b8b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxmbGF0YmVkJTIwdHJhaWxlcnxlbnwwfHx8fDE3NjM4NDg1OTB8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "flatbed trailer"
+    },
+    {
+      "id": "product-trailer-3",
+      "description": "Sơ Mi Rơ Moóc Xương",
+      "imageUrl": "https://images.unsplash.com/photo-1620295842242-9907f3531102?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxjb250YWluZXIlMjB0cmFpbGVyfGVufDB8fHx8MTc2Mzg0ODU5MHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "container trailer"
     }
   ]
 }
