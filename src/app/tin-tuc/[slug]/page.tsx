@@ -3,32 +3,54 @@ import Footer from '@/components/common/Footer';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Calendar, Tag, ArrowLeft, User } from 'lucide-react';
-import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { Button } from '@/components/ui/button';
+import fs from 'fs';
+import path from 'path';
+import matter from 'gray-matter';
+import { format } from 'date-fns';
+import { vi } from 'date-fns/locale';
 
 // Dữ liệu giả cho một bài viết chi tiết
 const getArticleBySlug = (slug: string) => {
-  const articles = [
-    {
-      slug: 'soosan-ra-mat-dong-xe-tai-cau-moi-2024',
-      title: 'Soosan Vina Ra Mắt Dòng Xe Tải Cẩu Mới 2024',
-      date: '15/07/2024',
-      category: 'Sản phẩm mới',
-      author: 'Soosan Vina',
-      imageUrl: PlaceHolderImages.find(p => p.id === 'product-crane-1')?.imageUrl || '',
-      imageHint: 'crane truck',
-      description: 'Dòng xe tải cẩu mới của Soosan Vina hứa hẹn mang lại hiệu suất vượt trội và độ tin cậy cao, đáp ứng nhu cầu ngày càng tăng của ngành xây dựng và vận tải.',
-      content: `
-        <p class="mb-4 leading-relaxed">Hôm nay, Soosan Vina Motor, một trong những nhà sản xuất và lắp ráp xe chuyên dùng hàng đầu Việt Nam, đã chính thức công bố ra mắt dòng xe tải gắn cẩu tự hành thế hệ mới năm 2024. Sự kiện này đánh dấu một bước tiến quan trọng trong việc áp dụng công nghệ tiên tiến và thiết kế hiện đại vào các sản phẩm của công ty, nhằm đáp ứng tốt hơn nhu cầu đa dạng của thị trường.</p>
-        <p class="mb-4 leading-relaxed">Dòng xe tải cẩu mới được trang bị động cơ Euro 5 mạnh mẽ, tiết kiệm nhiên liệu và thân thiện với môi trường. Hệ thống cẩu Soosan được cải tiến với khả năng nâng và tầm vươn vượt trội, cùng với các tính năng an toàn tiên tiến như hệ thống cân bằng tải trọng và cảnh báo quá tải, đảm bảo an toàn tối đa cho người vận hành và hàng hóa.</p>
-        <h3 class="text-2xl font-bold font-headline mt-6 mb-3">Thiết Kế Tối Ưu Cho Hiệu Suất</h3>
-        <p class="mb-4 leading-relaxed">Thùng xe được thiết kế và sản xuất từ vật liệu cao cấp, có khả năng chịu tải cao và chống ăn mòn hiệu quả. Thiết kế thông minh giúp tối ưu hóa không gian chứa hàng và dễ dàng trong việc bốc dỡ. Cabin xe cũng được chú trọng với không gian rộng rãi, tiện nghi, mang lại sự thoải mái cho tài xế trên những chặng đường dài.</p>
-        <p class="mb-4 leading-relaxed">Phát biểu tại buổi lễ, ông Nguyễn Văn An, Tổng Giám đốc Soosan Vina Motor, chia sẻ: "Với dòng sản phẩm mới này, chúng tôi không chỉ muốn mang đến một công cụ làm việc hiệu quả, mà còn là một người bạn đồng hành đáng tin cậy cho mọi doanh nghiệp. Chúng tôi cam kết tiếp tục nghiên cứu và phát triển để mang lại những giải pháp vận tải tốt nhất cho khách hàng."</p>
-      `
-    },
-    // Add other articles here if needed
-  ];
-  return articles.find(a => a.slug === slug);
+  const postsDirectory = path.join(process.cwd(), 'src/content/posts');
+  const filePath = path.join(postsDirectory, `${slug}.md`);
+  
+  if (!fs.existsSync(filePath)) {
+    return null;
+  }
+
+  const fileContents = fs.readFileSync(filePath, 'utf8');
+  const { data, content } = matter(fileContents);
+
+  // Convert markdown content to basic HTML
+  const htmlContent = content.split('\n').map(line => {
+    if (line.startsWith('### ')) {
+      return `<h3 class="text-2xl font-bold font-headline mt-6 mb-3">${line.substring(4)}</h3>`;
+    }
+    if (line.startsWith('**')) {
+      return `<p class="mb-4 leading-relaxed"><strong>${line.substring(2, line.length - 2)}</strong></p>`;
+    }
+     if (line.startsWith('*   ')) {
+      return `<li class="mb-2 ml-4 list-disc">${line.substring(4)}</li>`;
+    }
+    if (line.trim() === '') {
+      return '';
+    }
+    return `<p class="mb-4 leading-relaxed">${line}</p>`;
+  }).join('');
+
+
+  return {
+    slug,
+    title: data.title,
+    date: data.date,
+    category: data.category,
+    author: 'Soosan Vina', // Assuming author is static for now
+    imageUrl: data.imageUrl,
+    imageHint: data.imageHint,
+    description: data.description,
+    content: htmlContent,
+  };
 }
 
 
@@ -65,10 +87,10 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
                     Quay lại danh sách tin tức
                 </Link>
                 <h1 className="text-3xl md:text-4xl font-bold font-headline mb-4">{article.title}</h1>
-                <div className="flex items-center space-x-4 text-sm text-muted-foreground">
+                <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-muted-foreground">
                     <div className="flex items-center">
                         <Calendar className="mr-2 h-4 w-4" />
-                        <span>{article.date}</span>
+                        <span>{format(new Date(article.date), 'dd/MM/yyyy', { locale: vi })}</span>
                     </div>
                     <div className="flex items-center">
                         <Tag className="mr-2 h-4 w-4" />
@@ -102,4 +124,15 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
       <Footer />
     </div>
   );
+}
+
+export async function generateStaticParams() {
+  const postsDirectory = path.join(process.cwd(), 'src/content/posts');
+   if (!fs.existsSync(postsDirectory)) {
+    return [];
+  }
+  const filenames = fs.readdirSync(postsDirectory);
+  return filenames.map((filename) => ({
+    slug: filename.replace(/\.md$/, ''),
+  }));
 }

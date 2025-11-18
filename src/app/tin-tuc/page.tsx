@@ -4,40 +4,52 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import Header from '@/components/common/Header';
 import Footer from '@/components/common/Footer';
-import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { Calendar, Tag } from 'lucide-react';
+import fs from 'fs';
+import path from 'path';
+import matter from 'gray-matter';
+import { format } from 'date-fns';
+import { vi } from 'date-fns/locale';
 
-const newsItems = [
-  {
-    slug: 'soosan-ra-mat-dong-xe-tai-cau-moi-2024',
-    title: 'Soosan Vina Ra Mắt Dòng Xe Tải Cẩu Mới 2024',
-    date: '15/07/2024',
-    category: 'Sản phẩm mới',
-    imageUrl: PlaceHolderImages.find(p => p.id === 'product-crane-1')?.imageUrl || '',
-    imageHint: 'crane truck',
-    description: 'Dòng xe tải cẩu mới của Soosan Vina hứa hẹn mang lại hiệu suất vượt trội và độ tin cậy cao, đáp ứng nhu cầu ngày càng tăng của ngành xây dựng và vận tải.',
-  },
-  {
-    slug: 'huong-dan-bao-duong-xe-tai-dong-lanh',
-    title: 'Hướng Dẫn Bảo Dưỡng Hệ Thống Lạnh Trên Xe Tải',
-    date: '10/07/2024',
-    category: 'Tư vấn kỹ thuật',
-    imageUrl: PlaceHolderImages.find(p => p.id === 'product-fridge-1')?.imageUrl || '',
-    imageHint: 'refrigerated truck',
-    description: 'Để đảm bảo xe tải đông lạnh hoạt động ổn định và giữ chất lượng hàng hóa, việc bảo dưỡng hệ thống lạnh định kỳ là vô cùng quan trọng. Dưới đây là các bước bạn cần biết.',
-  },
-  {
-    slug: 'quy-dinh-moi-ve-tai-trong-xe-so-mi-ro-mooc',
-    title: 'Quy Định Mới Về Tải Trọng Đối Với Sơ Mi Rơ Moóc',
-    date: '05/07/2024',
-    category: 'Tin tức ngành',
-    imageUrl: PlaceHolderImages.find(p => p.id === 'product-trailer-1')?.imageUrl || '',
-    imageHint: 'semi trailer',
-    description: 'Cập nhật những thay đổi quan trọng trong quy định về tải trọng cho xe sơ mi rơ moóc, giúp các doanh nghiệp vận tải tuân thủ đúng pháp luật và hoạt động hiệu quả.',
-  },
-];
+type Post = {
+  slug: string;
+  title: string;
+  date: string;
+  category: string;
+  imageUrl: string;
+  imageHint: string;
+  description: string;
+};
+
+function getPosts(): Post[] {
+  const postsDirectory = path.join(process.cwd(), 'src/content/posts');
+  if (!fs.existsSync(postsDirectory)) {
+    return [];
+  }
+  const fileNames = fs.readdirSync(postsDirectory);
+  const allPosts = fileNames.map((fileName) => {
+    const slug = fileName.replace(/\.md$/, '');
+    const fullPath = path.join(postsDirectory, fileName);
+    const fileContents = fs.readFileSync(fullPath, 'utf8');
+    const { data } = matter(fileContents);
+
+    return {
+      slug,
+      title: data.title,
+      date: data.date,
+      category: data.category,
+      imageUrl: data.imageUrl,
+      imageHint: data.imageHint,
+      description: data.description,
+    } as Post;
+  });
+
+  return allPosts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+}
 
 export default function NewsPage() {
+  const newsItems = getPosts();
+
   return (
     <div className="flex flex-col min-h-screen bg-background">
       <Header />
@@ -72,7 +84,7 @@ export default function NewsPage() {
                        </div>
                        <div className="flex items-center">
                            <Calendar className="mr-1.5 h-4 w-4" />
-                           {item.date}
+                           {format(new Date(item.date), 'dd/MM/yyyy', { locale: vi })}
                        </div>
                     </div>
                     <h2 className="text-xl font-bold font-headline h-14 mb-2">
